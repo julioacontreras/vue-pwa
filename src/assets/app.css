@@ -1,0 +1,14 @@
+:root {
+  --md-theme-default-primary: #448aff;
+  --md-theme-default-accent: #5e52ff;
+  --md-theme-default-theme: light;
+  --md-theme-default-accent-on-background: #5e52ff;
+}
+
+.md-theme-default :not(input):not(textarea)::selection {
+  background-color: #5e52ff !important;
+}
+
+.bg-primary {
+  background-color: #e4e2ff !important;
+}
