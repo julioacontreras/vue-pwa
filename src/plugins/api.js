@@ -10,7 +10,8 @@ const getUsers = async () => {
       name: `${user.name.title} ${user.name.first} `,
       gender: user.gender,
       nationality: user.nat,
-      age: user.dob.age
+      age: user.dob.age,
+      favorite: false
     })
   })
   return users

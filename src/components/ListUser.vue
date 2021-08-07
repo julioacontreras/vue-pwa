@@ -2,15 +2,15 @@
   <div>
     <md-table v-model="users" md-card @md-selected="onSelect">
       <md-table-toolbar>
-        <h1 class="md-title">With auto select and alternate headers</h1>
+        <h1 class="md-title">User list</h1>
       </md-table-toolbar>
       <md-table-toolbar slot="md-table-alternate-header" class="bg-primary" slot-scope="{ count }">
         <div class="md-toolbar-section-start">{{ getAlternateLabel(count) }}</div>
         <div class="md-toolbar-section-end">
-          <md-button class="md-icon-button" v-on:click.stop="deleteUser">
+          <md-button class="md-icon-button" v-on:click.stop="deleteUserSelecteds">
             <md-icon>delete</md-icon>
           </md-button>
-          <md-button class="md-icon-button" v-on:click.stop="starUser">
+          <md-button class="md-icon-button" v-on:click.stop="starUserSelecteds">
             <md-icon>star_rate</md-icon>
           </md-button>
         </div>
@@ -33,19 +33,25 @@
 </template>
 
 <script>
-import { getUsers } from "../plugins/api";
+import { userStore } from "../store";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
+  store: userStore,
   data() {
     return {
-      selected: [],
-      users: []
+      selected: []
     };
   },
-  async mounted() {
-    this.users = await getUsers();
+  computed: {
+    ...mapGetters({ users: "getUsers" })
+  },
+  mounted() {
+    this.loadUsers();
   },
   methods: {
+    ...mapActions(["loadUsers", "deleteUsers", "starUsers"]),
+
     onSelect(items) {
       this.selected = items;
     },
@@ -58,22 +64,12 @@ export default {
       return `${count} user${plural} selected`;
     },
 
-    deleteUser() {
-      this.selected.forEach(userToDelete => {
-        let index = -1;
-        this.users.forEach((user, idx) => {
-          if (user.id === userToDelete.id) {
-            index = idx;
-          }
-        });
-        if (index >= 0) {
-          this.users.splice(index, 1);
-        }
-      });
+    deleteUserSelecteds() {
+      this.deleteUsers(this.selected);
     },
 
-    starUser() {
-      console.log("star!");
+    starUserSelecteds() {
+      this.starUsers(this.selected);
     }
   }
 };
