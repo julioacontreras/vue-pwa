@@ -1,5 +1,6 @@
 <template>
   <div>
+    <md-button class="md-icon-button" v-on:click.stop="exportCVS">Export favortite users</md-button>
     <md-table v-model="users" md-card @md-selected="onSelect">
       <md-table-toolbar>
         <h1 class="md-title">User list</h1>
@@ -42,6 +43,7 @@
 <script>
 import { userStore } from "../store";
 import { mapActions, mapGetters } from "vuex";
+import cvs from "../plugins/cvs";
 
 export default {
   store: userStore,
@@ -58,6 +60,7 @@ export default {
   },
   methods: {
     ...mapActions(["loadUsers", "deleteUsers", "favoriteUsers"]),
+    ...mapGetters({ getFavoriteUsers: "getFavoriteUsers" }),
 
     onSelect(items) {
       this.selected = items;
@@ -77,6 +80,10 @@ export default {
 
     starUserSelecteds() {
       this.favoriteUsers(this.selected);
+    },
+
+    exportCVS() {
+      cvs.run(this.getFavoriteUsers());
     }
   }
 };

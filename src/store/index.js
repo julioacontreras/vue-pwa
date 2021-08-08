@@ -32,6 +32,9 @@ const userStore = new Vuex.Store({
     },
     getUserSelected(state) {
       return state.userSelected
+    },
+    getFavoriteUsers(state) {
+      return state.users.filter((user) => (user.favorite === true))
     }
   },
   actions: {

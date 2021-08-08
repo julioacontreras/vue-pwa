@@ -2,6 +2,7 @@
   <div>
     <div v-if="!user">User not found</div>
     <div v-if="user">
+      <img :src="user.picture" />
       User {{ user }}
       <p>{{ user.name }}</p>
     </div>
@@ -24,7 +25,6 @@ export default {
     ...mapGetters({ user: "getUserSelected" })
   },
   async mounted() {
-    console.log(this.id);
     await this.setUserSelectedById(this.id);
   },
   methods: {

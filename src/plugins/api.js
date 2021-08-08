@@ -14,7 +14,8 @@ const getUsers = async () => {
       age: user.dob.age,
       birthday: format(new Date(user.dob.date), 'dd/MM/yyyy'),
       favorite: false,
-      createdAt: format(new Date(), 'dd/MM/yyyy')
+      createdAt: format(new Date(), 'dd/MM/yyyy'),
+      picture: user.picture.large
     })
   })
   return users
