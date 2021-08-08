@@ -12,6 +12,7 @@ const getUsers = async () => {
       gender: user.gender,
       nationality: user.nat,
       age: user.dob.age,
+      birthday: format(new Date(user.dob.date), 'dd/MM/yyyy'),
       favorite: false,
       createdAt: format(new Date(), 'dd/MM/yyyy')
     })

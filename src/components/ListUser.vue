@@ -29,7 +29,8 @@
             {{ item.name }} {{ item.favorite + '' }}
           </router-link>
         </md-table-cell>
-        <md-table-cell md-label="age" md-sort-by="age">{{ item.age }}</md-table-cell>
+        <md-table-cell md-label="Birthday" md-sort-by="birthday">{{ item.birthday }}</md-table-cell>
+        <md-table-cell md-label="Age" md-sort-by="age">{{ item.age }}</md-table-cell>
         <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
         <md-table-cell md-label="Nationality" md-sort-by="nationality">{{ item.nationality }}</md-table-cell>
         <md-table-cell md-label="Created at" md-sort-by="nationality">{{ item.createdAt }}</md-table-cell>
