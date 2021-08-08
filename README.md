@@ -1,4 +1,12 @@
-# vue-pwa-test
+# Vuejs 2 and PWA Example
+
+## Dependencies
+
+* Axios
+* Date-fns
+* Materialize IO
+* Vue-route
+* Vuex
 
 ## Project setup
 ```

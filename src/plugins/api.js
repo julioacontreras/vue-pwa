@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { format } from 'date-fns'
 
 const getUsers = async () => {
   const users = []
@@ -11,7 +12,8 @@ const getUsers = async () => {
       gender: user.gender,
       nationality: user.nat,
       age: user.dob.age,
-      favorite: false
+      favorite: false,
+      createdAt: format(new Date(), 'dd/MM/yyyy')
     })
   })
   return users

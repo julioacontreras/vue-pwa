@@ -24,12 +24,15 @@
       >
         <md-table-cell md-label="#" md-sort-by="id">{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name" md-sort-by="name">
-          <span v-if="item.favorite">★</span>
-          {{ item.name }} {{ item.favorite + '' }}
+          <router-link :to="`/user/${item.id}`">
+            <span v-if="item.favorite">★</span>
+            {{ item.name }} {{ item.favorite + '' }}
+          </router-link>
         </md-table-cell>
         <md-table-cell md-label="age" md-sort-by="age">{{ item.age }}</md-table-cell>
         <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
         <md-table-cell md-label="Nationality" md-sort-by="nationality">{{ item.nationality }}</md-table-cell>
+        <md-table-cell md-label="Created at" md-sort-by="nationality">{{ item.createdAt }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>

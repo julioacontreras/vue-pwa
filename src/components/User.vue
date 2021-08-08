@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div v-if="!user">User not found</div>
     <div v-if="user">
+      User {{ user }}
       <p>{{ user.name }}</p>
     </div>
   </div>
@@ -21,8 +23,9 @@ export default {
   computed: {
     ...mapGetters({ user: "getUserSelected" })
   },
-  mounted() {
-    this.setUserSelectedById(this.id);
+  async mounted() {
+    console.log(this.id);
+    await this.setUserSelectedById(this.id);
   },
   methods: {
     ...mapActions(["setUserSelectedById"])
