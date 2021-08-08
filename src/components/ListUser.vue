@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-button class="md-icon-button" v-on:click.stop="exportCVS">Export favortite users</md-button>
+    <md-button class="md-button md-primary" v-on:click.stop="exportCVS">Export favortite users</md-button>
     <md-table v-model="users" md-card @md-selected="onSelect">
       <md-table-toolbar>
         <h1 class="md-title">User list</h1>
