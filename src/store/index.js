@@ -16,13 +16,22 @@ const userStore = new Vuex.Store({
     SET_USER(state, { user, index }) {
       state.users[index] = user
     },
+    SET_USER_SELECTED(state, user) {
+      state.userSelected = user
+    },
     REMOVE_USER_BY_INDEX(state, index) {
       state.users.splice(index, 1);
+    },
+    TOGGLE_FAVORITE(state, index) {
+      state.users[index].favorite = !state.users[index].favorite
     }
   },
   getters: {
     getUsers(state) {
       return state.users
+    },
+    getUserSelected(state) {
+      return state.userSelected
     }
   },
   actions: {
@@ -32,6 +41,11 @@ const userStore = new Vuex.Store({
 
     deleteAll({ commit }) {
       commit('SET_USERS', [])
+    },
+
+    async setUserSelectedById({ commit, dispatch, state }, id) {
+      const index = await dispatch('findUser', id);
+      commit('SET_USER_SELECTED', state.users[index])
     },
 
     deleteUsers({ dispatch, commit, state }, selected) {
@@ -47,12 +61,12 @@ const userStore = new Vuex.Store({
       });
     },
 
-    favoriteUsers({ commit, state, dispatch }, selected) {
-      selected.forEach((userToFavorite) => {
-        const index = dispatch('findUser', userToFavorite.id);
-        const user = Object.assign({}, state.users[index])
-        user.favorite = true;
-        commit('SET_USER', { user, index })
+    favoriteUsers({ commit, dispatch }, selected) {
+      selected.forEach(async (userSelected) => {
+        const index = await dispatch('findUser', userSelected.id);
+        if (index >= 0) {
+          commit('TOGGLE_FAVORITE', index)
+        }
       })
     },
 

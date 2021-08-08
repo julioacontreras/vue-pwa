@@ -7,11 +7,15 @@ import 'vue-material/dist/vue-material.css'
 import 'vue-material/dist/theme/default.css'
 import './assets/app.css'
 import './registerServiceWorker'
+import VueRouter from 'vue-router'
+import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
 Vue.use(Vuex)
+Vue.use(VueRouter)
 
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')

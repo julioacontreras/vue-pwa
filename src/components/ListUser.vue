@@ -23,7 +23,10 @@
         md-auto-select
       >
         <md-table-cell md-label="#" md-sort-by="id">{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Name" md-sort-by="name">
+          <span v-if="item.favorite">★</span>
+          {{ item.name }} {{ item.favorite + '' }}
+        </md-table-cell>
         <md-table-cell md-label="age" md-sort-by="age">{{ item.age }}</md-table-cell>
         <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
         <md-table-cell md-label="Nationality" md-sort-by="nationality">{{ item.nationality }}</md-table-cell>
@@ -50,7 +53,7 @@ export default {
     this.loadUsers();
   },
   methods: {
-    ...mapActions(["loadUsers", "deleteUsers", "starUsers"]),
+    ...mapActions(["loadUsers", "deleteUsers", "favoriteUsers"]),
 
     onSelect(items) {
       this.selected = items;
@@ -69,7 +72,7 @@ export default {
     },
 
     starUserSelecteds() {
-      this.starUsers(this.selected);
+      this.favoriteUsers(this.selected);
     }
   }
 };
